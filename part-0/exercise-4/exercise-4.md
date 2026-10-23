@@ -1,3 +1,4 @@
+```mermaid
 sequenceDiagram
     participant browser
     participant server
@@ -11,6 +12,6 @@ sequenceDiagram
     activate server
     server-->>browser: the notes app with the new note
     deactivate server
-
+```
 
 
