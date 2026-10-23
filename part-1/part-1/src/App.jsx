@@ -48,13 +48,13 @@ const App = () => {
     exercises: 14,
   };
 
-  const content = [part1, part2, part3];
+  const parts = [part1, part2, part3];
 
   return (
     <div>
       <Header title={course}></Header>
-      <Content content={content}></Content>
-      <Total content={content}></Total>
+      <Content content={parts}></Content>
+      <Total content={parts}></Total>
     </div>
   );
 };
