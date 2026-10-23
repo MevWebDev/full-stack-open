@@ -10,19 +10,22 @@ const Content = (props) => {
   return (
     <div>
       {props.content.map((x, index) => {
-        return (
-          <div key={index}>
-            {x[0]}: {x[1]}
-          </div>
-        );
+        return <Part key={index} title={x[0]} exercises={x[1]}></Part>;
       })}
     </div>
   );
 };
 
+const Part = (props) => {
+  return (
+    <p>
+      {props.title}: {props.exercises}
+    </p>
+  );
+};
+
 const Total = (props) => {
   const total = props.content.reduce((acc, curr) => (acc += curr[1]), 0);
-  console.log(total);
 
   return <p>Number of exercises: {total}</p>;
 };
