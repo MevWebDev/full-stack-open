@@ -1,3 +1,4 @@
+```mermaid
 sequenceDiagram
     participant browser
     participant server
@@ -9,5 +10,5 @@ sequenceDiagram
 
      Note right of browser: The browser starts executing the JavaScript code that fetches the JSON from the server and redraws notes
 
-   
+```   
 
