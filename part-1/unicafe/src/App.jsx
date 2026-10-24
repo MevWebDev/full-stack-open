@@ -21,6 +21,8 @@ function App() {
 
   const all = good + neutral + bad;
 
+  const isFeedback = all > 0 ? true : false;
+
   const average = (good * 1 + bad * -1) / all;
 
   const positive = (good / all) * 100 || 0;
@@ -40,7 +42,7 @@ function App() {
       <button onClick={() => setGood(good + 1)}>good</button>
       <button onClick={() => setNeutral(neutral + 1)}>neutral</button>
       <button onClick={() => setBad(bad + 1)}>bad</button>
-      <Statistics statistics={statistics}></Statistics>
+      {isFeedback && <Statistics statistics={statistics}></Statistics>}
     </div>
   );
 }
