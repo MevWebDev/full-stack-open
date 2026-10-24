@@ -27,6 +27,7 @@ const Course = () => {
   const total = course.parts.reduce((acc, curr) => {
     return (acc += curr.exercises);
   }, 0);
+  // comment for new commit
 
   return (
     <div>
