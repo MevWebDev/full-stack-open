@@ -1,33 +1,11 @@
 import Header from "./Header";
 import Content from "./Content";
 
-const Course = () => {
-  const course = {
-    name: "Half Stack application development",
-    parts: [
-      {
-        name: "Fundamentals of React",
-        exercises: 10,
-      },
-      {
-        name: "Using props to pass data",
-        exercises: 7,
-      },
-      {
-        name: "State of a component",
-        exercises: 14,
-      },
-      {
-        name: "Redux",
-        exercises: 11,
-      },
-    ],
-  };
-
+const Course = ({ course }) => {
+  console.log(course);
   const total = course.parts.reduce((acc, curr) => {
     return (acc += curr.exercises);
   }, 0);
-  // comment for new commit
 
   return (
     <div>
