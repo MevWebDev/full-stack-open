@@ -3,15 +3,39 @@ import { useState } from "react";
 const Statistics = ({ statistics }) => {
   return (
     <>
-      <h2>statistics</h2>
-      <p>good {statistics.good}</p>
-      <p>neutral {statistics.neutral}</p>
-      <p>bad {statistics.bad}</p>
-      <p>All {statistics.all}</p>
-      <p>Average {statistics.average}</p>
-      <p>Positive {statistics.positive}%</p>
+      <h2>Statistics</h2>
+      <StatisticsLine
+        statistic={"good"}
+        value={statistics.good}
+      ></StatisticsLine>
+      <StatisticsLine
+        statistic={"neutral"}
+        value={statistics.neutral}
+      ></StatisticsLine>
+      <StatisticsLine statistic={"bad"} value={statistics.bad}></StatisticsLine>
+      <StatisticsLine statistic={"all"} value={statistics.all}></StatisticsLine>
+      <StatisticsLine
+        statistic={"Average"}
+        value={statistics.average}
+      ></StatisticsLine>
+      <StatisticsLine
+        statistic={"positive"}
+        value={statistics.positive}
+      ></StatisticsLine>
     </>
   );
+};
+
+const StatisticsLine = ({ statistic, value }) => {
+  return (
+    <p>
+      {statistic}:{value}
+    </p>
+  );
+};
+
+const Button = ({ onClick, text }) => {
+  return <button onClick={onClick}>{text}</button>;
 };
 
 function App() {
@@ -25,7 +49,7 @@ function App() {
 
   const average = (good * 1 + bad * -1) / all;
 
-  const positive = (good / all) * 100 || 0;
+  const positive = (good / all) * 100 + "%";
 
   const statistics = {
     good,
@@ -39,9 +63,9 @@ function App() {
   return (
     <div>
       <h1>give feedback</h1>
-      <button onClick={() => setGood(good + 1)}>good</button>
-      <button onClick={() => setNeutral(neutral + 1)}>neutral</button>
-      <button onClick={() => setBad(bad + 1)}>bad</button>
+      <Button onClick={() => setGood(good + 1)} text={"good"}></Button>
+      <Button onClick={() => setNeutral(neutral + 1)} text={"neutral"}></Button>
+      <Button onClick={() => setBad(bad + 1)} text={"bad"}></Button>
       {isFeedback && <Statistics statistics={statistics}></Statistics>}
     </div>
   );
