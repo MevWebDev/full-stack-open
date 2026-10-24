@@ -28,9 +28,10 @@ const Statistics = ({ statistics }) => {
 
 const StatisticsLine = ({ statistic, value }) => {
   return (
-    <p>
-      {statistic}:{value}
-    </p>
+    <tr>
+      <td>{statistic}: </td>
+      <td>{value}</td>
+    </tr>
   );
 };
 
