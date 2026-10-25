@@ -10,8 +10,17 @@ const App = () => {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
+    if (checkIfExists(newName)) {
+      alert(`${newName} already exists`);
+      return;
+    }
     const newPerson = { name: newName };
     setPersons([...persons, newPerson]);
+    setNewName("");
+  };
+
+  const checkIfExists = (name) => {
+    return persons.some((person) => person.name === name);
   };
 
   return (
