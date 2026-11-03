@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import Filter from "./components/Filter";
 import Form from "./components/Form";
 import Persons from "./components/Persons";
-import axios from "axios";
+
+import personsService from "./services/persons";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -11,9 +12,9 @@ const App = () => {
   const [filter, setFilter] = useState("");
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3001/persons")
-      .then((response) => setPersons(response.data));
+    personsService
+      .getAll()
+      .then((initialPersons) => setPersons(initialPersons));
   }, []);
 
   const filtered = persons.filter((p) =>
@@ -31,6 +32,12 @@ const App = () => {
     setNewPhone(event.target.value);
   };
 
+  const handleDeletion = (id) => {
+    personsService.deletePerson(id).then((deleted) => {
+      setPersons(persons.filter((p) => p.id !== deleted.id));
+    });
+  };
+
   const handleFormSubmit = (event) => {
     event.preventDefault();
     if (!newName || !newPhone) return alert("fill form first");
@@ -41,8 +48,8 @@ const App = () => {
     }
     const newPerson = { name: newName, phone: newPhone };
 
-    axios.post("http://localhost:3001/persons", newPerson).then((response) => {
-      setPersons((current) => [...current, response.data]);
+    personsService.addPerson(newPerson).then((newPerson) => {
+      setPersons((current) => [...current, newPerson]);
       setNewName("");
       setNewPhone("");
     });
@@ -64,7 +71,11 @@ const App = () => {
         newPhone={newPhone}
       />
       <h2>Numbers</h2>
-      {filter ? <Persons persons={filtered} /> : <Persons persons={persons} />}
+      {filter ? (
+        <Persons persons={filtered} handleDelete={handleDeletion} />
+      ) : (
+        <Persons persons={persons} handleDelete={handleDeletion} />
+      )}
     </div>
   );
 };

@@ -24,6 +24,11 @@
       "name": "szymon",
       "phone": "grysiewicz",
       "id": "6BdSetPbHs8"
+    },
+    {
+      "name": "Nadia",
+      "phone": "2137231231",
+      "id": "2wxt4icIYRY"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
