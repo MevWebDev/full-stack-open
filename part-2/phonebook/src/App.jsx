@@ -43,13 +43,25 @@ const App = () => {
     if (!newName || !newPhone) return alert("fill form first");
 
     if (checkIfExists(newName)) {
-      alert(`${newName} already exists`);
+      const existing = persons.find((p) => p.name === newName);
+
+      personsService
+        .updatePerson(existing.id, { ...existing, phone: newPhone })
+        .then((updatedPerson) => {
+          setPersons((current) =>
+            current.map((p) => (p.id === updatedPerson.id ? updatedPerson : p)),
+          );
+          setNewName("");
+          setNewPhone("");
+        });
+
       return;
     }
+
     const newPerson = { name: newName, phone: newPhone };
 
-    personsService.addPerson(newPerson).then((newPerson) => {
-      setPersons((current) => [...current, newPerson]);
+    personsService.addPerson(newPerson).then((createdPerson) => {
+      setPersons((current) => [...current, createdPerson]);
       setNewName("");
       setNewPhone("");
     });

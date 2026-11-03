@@ -18,4 +18,10 @@ const deletePerson = (id) => {
     .then((response) => response.data)
     .catch((err) => console.log(err));
 };
-export default { getAll, addPerson, deletePerson };
+
+const updatePerson = (id, updatedPerson) => {
+  return axios
+    .put(`http://localhost:3001/persons/${id}`, updatedPerson)
+    .then((res) => res.data);
+};
+export default { getAll, addPerson, deletePerson, updatePerson };
